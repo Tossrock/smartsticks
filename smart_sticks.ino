@@ -1,11 +1,15 @@
 #include "FastLED.h"
 #include "input.h"
 
+#include <Snooze.h>
+SnoozeDigital digital;
+SnoozeBlock config(digital);
+
 FASTLED_USING_NAMESPACE
 
 #define DATA_PIN  23
 #define CLK_PIN   2
-#define SWITCH_PIN 3
+#define SWITCH_PIN 4
 #define LED_TYPE    APA102
 #define COLOR_ORDER BGR
 #define NUM_LEDS    16
@@ -24,6 +28,7 @@ void setup() {
   FastLED.addLeds<LED_TYPE,DATA_PIN,CLK_PIN,COLOR_ORDER>(leds, 32).setCorrection(TypicalLEDStrip);
   FastLED.setBrightness(BRIGHTNESS);
   pinMode(SWITCH_PIN, INPUT_PULLUP);
+  digital.pinMode(SWITCH_PIN, INPUT_PULLUP, FALLING);
 }
 
 typedef void (*SimplePatternList[])();
@@ -90,6 +95,7 @@ void turn_off(){
     FastLED.clear();
     FastLED.show();
   }
+  Snooze.sleep( config );
 }
 
 void run_pattern(){

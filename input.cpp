@@ -1,6 +1,6 @@
 #include "input.h"
 
-#define SWITCH_PIN 3
+#define SWITCH_PIN 4
 #define DOUBLECLICK_INTERVAL 300
 #define LONGPRESS_INTERVAL 1000
 
