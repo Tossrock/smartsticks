@@ -28,7 +28,6 @@ void setup() {
   FastLED.addLeds<LED_TYPE,DATA_PIN,CLK_PIN,COLOR_ORDER>(leds, 32).setCorrection(TypicalLEDStrip);
   FastLED.setBrightness(BRIGHTNESS);
   pinMode(SWITCH_PIN, INPUT_PULLUP);
-  Serial.begin(9600);
   digital.pinMode(SWITCH_PIN, INPUT_PULLUP, FALLING);
 }
 
