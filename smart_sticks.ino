@@ -23,8 +23,8 @@ bool systemrunning = true;
 byte increment = 1;
 
 void setup() {
-  reset_button_state();
   delay(3000); // 3 second delay for recovery
+  reset_button_state();
   FastLED.addLeds<LED_TYPE,DATA_PIN,CLK_PIN,COLOR_ORDER>(leds, 32).setCorrection(TypicalLEDStrip);
   FastLED.setBrightness(BRIGHTNESS);
   pinMode(SWITCH_PIN, INPUT_PULLUP);
