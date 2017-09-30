@@ -1,5 +1,6 @@
 #include "FastLED.h"
 #include "input.h"
+#include "images.h"
 
 #include <Snooze.h>
 SnoozeDigital digital;
@@ -22,23 +23,6 @@ CRGB leds[32];
 bool systemrunning = true;
 byte increment = 1;
 
-const uint8_t PROGMEM pixels_nyan[] = {
-0X00, 0XF6, 0XFF,  0X00, 0XF6, 0XFF,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0XFF, 0X00, 0XDE,  0XFF, 0X00, 0XDE,  0X00, 0XF6, 0XFF,  0X00, 0XF6, 0XFF,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0XFF, 0X00, 0XDE,  0XFF, 0X00, 0XDE,
-0X00, 0XF6, 0XFF,  0X00, 0XF6, 0XFF,  0X00, 0XF6, 0XFF,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0XFF, 0X00, 0XDE,  0XFF, 0X00, 0XDE,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0XF6, 0XFF,  0X00, 0XF6, 0XFF,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0XFF, 0X00, 0XDE,  0XFF, 0X00, 0XDE,  0XFF, 0X00, 0XDE,
-0X00, 0X00, 0X00,  0X00, 0XF6, 0XFF,  0X00, 0XF6, 0XFF,  0XFF, 0XFF, 0XFF,  0XFF, 0X00, 0XDE,  0XFF, 0X00, 0XDE,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0XF6, 0XFF,  0X00, 0XF6, 0XFF,  0XFF, 0XFF, 0XFF,  0XFF, 0X00, 0XDE,  0XFF, 0X00, 0XDE,  0X00, 0X00, 0X00,
-0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0XFF, 0XFF, 0XFF,  0XFF, 0XFF, 0XFF,  0XFF, 0XFF, 0XFF,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0XFF, 0XFF, 0XFF,  0XFF, 0XFF, 0XFF,  0XFF, 0XFF, 0XFF,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,
-0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0XFF, 0X00, 0XDE,  0XFF, 0XFF, 0XFF,  0X00, 0XF6, 0XFF,  0X00, 0XF6, 0XFF,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0XFF, 0X00, 0XDE,  0XFF, 0X00, 0XDE,  0XFF, 0XFF, 0XFF,  0X00, 0XF6, 0XFF,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,
-0X00, 0X00, 0X00,  0XFF, 0X00, 0XDE,  0XFF, 0X00, 0XDE,  0X00, 0X00, 0X00,  0X00, 0XF6, 0XFF,  0X00, 0XF6, 0XFF,  0X00, 0XF6, 0XFF,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0XFF, 0X00, 0XDE,  0XFF, 0X00, 0XDE,  0XFF, 0X00, 0XDE,  0X00, 0X00, 0X00,  0X00, 0XF6, 0XFF,  0X00, 0XF6, 0XFF,  0X00, 0X00, 0X00,
-0XFF, 0X00, 0XDE,  0XFF, 0X00, 0XDE,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0XF6, 0XFF,  0X00, 0XF6, 0XFF,  0XFF, 0XFF, 0XFF,  0XFF, 0XFF, 0XFF,  0XFF, 0X00, 0XDE,  0XFF, 0X00, 0XDE,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0XF6, 0XFF,  0X00, 0XF6, 0XFF,
-0XFF, 0X00, 0XDE,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0XFF, 0XFF, 0XFF,  0XFF, 0XFF, 0XFF,  0XFF, 0XFF, 0XFF,  0XFF, 0XFF, 0XFF,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0XF6, 0XFF,
-0X00, 0XF6, 0XFF,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0XFF, 0XFF, 0XFF,  0XFF, 0XFF, 0XFF,  0XFF, 0XFF, 0XFF,  0XFF, 0XFF, 0XFF,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0XFF, 0X00, 0XDE,
-0X00, 0XF6, 0XFF,  0X00, 0XF6, 0XFF,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0XFF, 0X00, 0XDE,  0XFF, 0X00, 0XDE,  0XFF, 0XFF, 0XFF,  0XFF, 0XFF, 0XFF,  0X00, 0XF6, 0XFF,  0X00, 0XF6, 0XFF,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0XFF, 0X00, 0XDE,  0XFF, 0X00, 0XDE,
-0X00, 0X00, 0X00,  0X00, 0XF6, 0XFF,  0X00, 0XF6, 0XFF,  0X00, 0X00, 0X00,  0XFF, 0X00, 0XDE,  0XFF, 0X00, 0XDE,  0XFF, 0X00, 0XDE,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0XF6, 0XFF,  0X00, 0XF6, 0XFF,  0X00, 0XF6, 0XFF,  0X00, 0X00, 0X00,  0XFF, 0X00, 0XDE,  0XFF, 0X00, 0XDE,  0X00, 0X00, 0X00,
-0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0XF6, 0XFF,  0XFF, 0XFF, 0XFF,  0XFF, 0X00, 0XDE,  0XFF, 0X00, 0XDE,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0XF6, 0XFF,  0X00, 0XF6, 0XFF,  0XFF, 0XFF, 0XFF,  0XFF, 0X00, 0XDE,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,
-0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0XFF, 0XFF, 0XFF,  0XFF, 0XFF, 0XFF,  0XFF, 0XFF, 0XFF,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0XFF, 0XFF, 0XFF,  0XFF, 0XFF, 0XFF,  0XFF, 0XFF, 0XFF,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,
-0X00, 0X00, 0X00,  0XFF, 0X00, 0XDE,  0XFF, 0X00, 0XDE,  0XFF, 0XFF, 0XFF,  0X00, 0XF6, 0XFF,  0X00, 0XF6, 0XFF,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0XFF, 0X00, 0XDE,  0XFF, 0X00, 0XDE,  0XFF, 0XFF, 0XFF,  0X00, 0XF6, 0XFF,  0X00, 0XF6, 0XFF,  0X00, 0X00, 0X00,
-0XFF, 0X00, 0XDE,  0XFF, 0X00, 0XDE,  0XFF, 0X00, 0XDE,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0XF6, 0XFF,  0X00, 0XF6, 0XFF,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0XFF, 0X00, 0XDE,  0XFF, 0X00, 0XDE,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0XF6, 0XFF,  0X00, 0XF6, 0XFF,  0X00, 0XF6, 0XFF,
-0XFF, 0X00, 0XDE,  0XFF, 0X00, 0XDE,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0XF6, 0XFF,  0X00, 0XF6, 0XFF,  0XFF, 0X00, 0XDE,  0XFF, 0X00, 0XDE,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0X00, 0X00,  0X00, 0XF6, 0XFF,  0X00, 0XF6, 0XFF,  };
 void setup() {
   delay(3000); // 3 second delay for recovery
   reset_button_state();
@@ -53,6 +37,10 @@ SimplePatternList gPatterns = { image_pattern, rainbow, rainbowWithGlitter, conf
 uint8_t gCurrentPatternNumber = 0; // Index number of which pattern is current
 uint8_t gHue = 0; // rotating "base color" used by many of the patterns
 int bright = 4*96;
+
+// Variables for the image_pattern Pattern
+int frame = 0;
+int image_index = 0;
 
 void loop() {
   byte input = get_input();
@@ -77,7 +65,16 @@ void loop() {
         // Wake on single click
         turn_on();
       } else {
-        nextPattern();
+        if (gCurrentPatternNumber == 0) {
+          frame = 0;
+          image_index++;
+          if (image_index == sizeof(image_patterns)/sizeof(image_patterns[0])) {
+            image_index = 0;
+            nextPattern();
+          }
+        } else {
+          nextPattern();
+        }
       }
       break;
     case doubleclick:
@@ -137,16 +134,15 @@ void nextPattern()
   gCurrentPatternNumber = (gCurrentPatternNumber + 1) % ARRAY_SIZE( gPatterns);
 }
 
-int frame = 0;
 void image_pattern(){
   int frame_offset = 16 * 3 * frame;
   for (int i=0; i<16; i++){
-    byte r = pixels_nyan[frame_offset + 3*i];
-    byte g = pixels_nyan[frame_offset + 3*i+1];
-    byte b = pixels_nyan[frame_offset + 3*i+2];
+    byte r = image_patterns[image_index][frame_offset + 3*i];
+    byte g = image_patterns[image_index][frame_offset + 3*i+1];
+    byte b = image_patterns[image_index][frame_offset + 3*i+2];
     leds[i] = CRGB(r,g,b);
   }
-  frame = (frame + 1) % (sizeof(pixels_nyan) / (3*16));
+  frame = (frame + 1) % frame_counts[image_index];
 }
 
 void rainbow() 
