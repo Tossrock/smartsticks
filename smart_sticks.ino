@@ -143,7 +143,7 @@ void image_pattern(){
     byte b = image_patterns[image_index][frame_offset + 3*i+2];
     leds[i] = CRGB(r,g,b);
   }
-  frame = (frame + 1) % (*(image_patterns[image_index]-1) / (3*16));
+  frame = (frame + 1) % frame_counts[image_index];
 }
 
 void rainbow() 
